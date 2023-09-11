@@ -1,0 +1,15 @@
+requests
+jdatetime
+pandas
+numpy
+requests
+bs4
+asyncio
+urllib3
+aiohttp
+unsync
+IPython
+persiantools
+datetime
+XlsxWriter
+lxml
