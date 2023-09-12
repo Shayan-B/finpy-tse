@@ -7,5 +7,4 @@ from .queue import *
 from .shareholders import *
 from .util import *
 
-__version__ = "1.2.6"
-
+__version__ = "1.2.6-local"
