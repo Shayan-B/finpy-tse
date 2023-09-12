@@ -26,20 +26,21 @@ from .util import (
 class purl(URL):
     def __init__(self, asset_type=None, **kwargs):
         super().__init__(asset_type, **kwargs)
+        self.base_url = "http://cdn.tsetmc.com/api/"
 
     def make_url(self):
         if self.atype == "up_lo_limit":
             ticker_no = self.kwargs["ticker_no"]
             date = self.kwargs["date"]
-            self.url = f"http://cdn.tsetmc.com/api/MarketData/GetStaticThreshold/{ticker_no}/{date}"
+            self.url = self.bse_url + f"MarketData/GetStaticThreshold/{ticker_no}/{date}"
         elif self.atype == "lob":
             ticker_no = self.kwargs["ticker_no"]
             date = self.kwargs["date"]
-            self.url = f"http://cdn.tsetmc.com/api/BestLimits/{ticker_no}/{date}"
+            self.url = self.base_url + f"BestLimits/{ticker_no}/{date}"
         elif self.atype == "up_lo_thresh":
             ticker_no = self.kwargs["ticker_no"]
             date = self.kwargs["date"]
-            self.url = f"http://cdn.tsetmc.com/api/MarketData/GetStaticThreshold/{ticker_no}/{date}"
+            self.url = self.base_url + f"MarketData/GetStaticThreshold/{ticker_no}/{date}"
         elif self.atype == "search_G":
             sector_name = self.kwargs["sector_name"]
             self.url = (
@@ -48,7 +49,7 @@ class purl(URL):
         elif self.atype == "search_TSE":
             srch_key = self.kwargs["srch_key"]
             self.url = (
-                f"http://cdn.tsetmc.com/api/Instrument/GetInstrumentSearch/{srch_key}"
+                self.base_url + f"Instrument/GetInstrumentSearch/{srch_key}"
             )
         elif not self.atype:
             self.url = None

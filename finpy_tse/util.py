@@ -604,6 +604,7 @@ def __Save_List__(
 
 class URL:
     def __init__(self, asset_type=None, **kwargs):
+        self.base_url = None
         self.header = {
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
         }
@@ -615,6 +616,7 @@ class URL:
         self.make_url()
 
     def make_url(self):
+        pass
         # if self.atype == "up_lo_limit":
         #     ticker_no = self.kwargs["ticker_no"]
         #     date = self.kwargs["date"]
@@ -660,4 +662,31 @@ class URL:
         #         srch_key = self.kwargs["srch_key"]
         #         self.url = f'http://cdn.tsetmc.com/api/Instrument/GetInstrumentSearch/{srch_key}'
 
-        return
+
+class dates:
+    def __init__(self, pdate, keyword):
+        self.keyword = keyword
+        self.date = pdate
+        self.date = self.__Check_JDate_Validity__()
+
+    def __Check_JDate_Validity__(self):
+        try:
+            if len(self.date.split("-")[0]) == 4:
+                t_date = self.build_date(self.date)
+                # t_date = f"{t_date.year:04}-{t_date.month:02}-{t_date.day:02}" I THOUGH THIS WAS UNNECESSARY
+                return t_date
+            else:
+                print(f"Please enter valid {self.keyword} date in YYYY-MM-DD format")
+        except:
+            if len(self.date) == 10:
+                print(f"Please enter valid {self.keyword} date")
+            else:
+                print(f"Please enter valid {self.keyword} date in YYYY-MM-DD format")
+        return 
+
+    def build_date(self, temp_date):
+        return jdatetime.date(
+            year=int(temp_date.split("-")[0]),
+            month=int(temp_date.split("-")[1]),
+            day=int(temp_date.split("-")[2]),
+        )

@@ -1,1 +1,6 @@
 *.ipynb
+finpy_tse.egg-info/
+build/
+dist/
+setup.py
+.vscode
